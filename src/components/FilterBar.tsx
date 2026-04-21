@@ -6,13 +6,13 @@ export function FilterBar() {
   const prestigeLevel = usePreferencesStore((s) => s.prestigeLevel);
   const firOnly = usePreferencesStore((s) => s.firOnly);
   const includeQuestItems = usePreferencesStore((s) => s.includeQuestItems);
-  const allSearch = usePreferencesStore((s) => s.allSearch);
+  const search = usePreferencesStore((s) => s.search);
   const setPrestigeLevel = usePreferencesStore((s) => s.setPrestigeLevel);
   const toggleFirOnly = usePreferencesStore((s) => s.toggleFirOnly);
   const toggleIncludeQuestItems = usePreferencesStore(
     (s) => s.toggleIncludeQuestItems,
   );
-  const setAllSearch = usePreferencesStore((s) => s.setAllSearch);
+  const setSearch = usePreferencesStore((s) => s.setSearch);
 
   return (
     <div className="flex flex-wrap items-center gap-3 text-xs">
@@ -41,28 +41,26 @@ export function FilterBar() {
         </label>
       )}
 
-      {objective === "all" && (
-        <div className="relative ml-auto flex items-center">
-          <input
-            type="search"
-            value={allSearch}
-            onChange={(e) => setAllSearch(e.target.value)}
-            placeholder="Search item name…"
-            aria-label="Search items by name"
-            className="h-7 w-56 rounded border border-zinc-600 bg-zinc-800 px-2 pr-7 text-zinc-50 placeholder:text-zinc-400 focus:border-emerald-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60"
-          />
-          {allSearch && (
-            <button
-              type="button"
-              onClick={() => setAllSearch("")}
-              aria-label="Clear search"
-              className="absolute right-1 flex h-5 w-5 items-center justify-center rounded text-zinc-300 hover:text-zinc-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-emerald-500"
-            >
-              ×
-            </button>
-          )}
-        </div>
-      )}
+      <div className="relative ml-auto flex items-center">
+        <input
+          type="search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search item name…"
+          aria-label="Search items by name"
+          className="h-7 w-56 rounded border border-zinc-600 bg-zinc-800 px-2 pr-7 text-zinc-50 placeholder:text-zinc-400 focus:border-emerald-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60"
+        />
+        {search && (
+          <button
+            type="button"
+            onClick={() => setSearch("")}
+            aria-label="Clear search"
+            className="absolute right-1 flex h-5 w-5 items-center justify-center rounded text-zinc-300 hover:text-zinc-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-emerald-500"
+          >
+            ×
+          </button>
+        )}
+      </div>
     </div>
   );
 }

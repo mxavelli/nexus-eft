@@ -44,7 +44,7 @@ export default function App() {
   const prestigeLevel = usePreferencesStore((s) => s.prestigeLevel);
   const firOnly = usePreferencesStore((s) => s.firOnly);
   const includeQuestItems = usePreferencesStore((s) => s.includeQuestItems);
-  const allSearch = usePreferencesStore((s) => s.allSearch);
+  const search = usePreferencesStore((s) => s.search);
 
   const { data, isPending, isError, error } = useTrackerData();
 
@@ -71,25 +71,25 @@ export default function App() {
     return aggregateForAll(data.tasks, data.hideoutStations, data.prestige);
   }, [data, objective]);
 
-  const filteredScoped = useMemo(
-    () =>
-      scopedItems.filter((it) => {
-        if (firOnly && !it.fir) return false;
-        if (!includeQuestItems && it.kind === "questItem") return false;
-        return true;
-      }),
-    [scopedItems, firOnly, includeQuestItems],
-  );
+  const filteredScoped = useMemo(() => {
+    const needle = search.trim().toLowerCase();
+    return scopedItems.filter((it) => {
+      if (firOnly && !it.fir) return false;
+      if (!includeQuestItems && it.kind === "questItem") return false;
+      if (needle && !it.displayName.toLowerCase().includes(needle)) return false;
+      return true;
+    });
+  }, [scopedItems, firOnly, includeQuestItems, search]);
 
   const filteredAll = useMemo(() => {
-    const needle = allSearch.trim().toLowerCase();
+    const needle = search.trim().toLowerCase();
     return allRows.filter((it) => {
       if (firOnly && !it.hasFir) return false;
       if (!includeQuestItems && it.kind === "questItem") return false;
       if (needle && !it.displayName.toLowerCase().includes(needle)) return false;
       return true;
     });
-  }, [allRows, firOnly, includeQuestItems, allSearch]);
+  }, [allRows, firOnly, includeQuestItems, search]);
 
   return (
     <main className="mx-auto flex h-full w-full flex-col gap-4 p-6 md:p-8">

@@ -7,12 +7,12 @@ type PreferencesState = {
   prestigeLevel: PrestigeLevel;
   firOnly: boolean;
   includeQuestItems: boolean;
-  allSearch: string;
+  search: string;
   setObjective: (o: Objective) => void;
   setPrestigeLevel: (n: PrestigeLevel) => void;
   toggleFirOnly: () => void;
   toggleIncludeQuestItems: () => void;
-  setAllSearch: (q: string) => void;
+  setSearch: (q: string) => void;
 };
 
 export const usePreferencesStore = create<PreferencesState>()(
@@ -22,13 +22,13 @@ export const usePreferencesStore = create<PreferencesState>()(
       prestigeLevel: 1,
       firOnly: false,
       includeQuestItems: true,
-      allSearch: "",
-      setObjective: (o) => set({ objective: o }),
+      search: "",
+      setObjective: (o) => set({ objective: o, search: "" }),
       setPrestigeLevel: (n) => set({ prestigeLevel: n }),
       toggleFirOnly: () => set((s) => ({ firOnly: !s.firOnly })),
       toggleIncludeQuestItems: () =>
         set((s) => ({ includeQuestItems: !s.includeQuestItems })),
-      setAllSearch: (q) => set({ allSearch: q }),
+      setSearch: (q) => set({ search: q }),
     }),
     {
       name: "nexus-eft-prefs-v1",
