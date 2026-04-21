@@ -1,0 +1,26 @@
+node_modules
+dist
+dist-ssr
+.vite
+*.local
+
+.DS_Store
+Thumbs.db
+
+.env
+.env.local
+.env.*.local
+
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+logs
+*.log
+npm-debug.log*
+
+# TypeScript incremental build cache
+*.tsbuildinfo
+
+# Claude Code working directory (plans, session data)
+.claude
