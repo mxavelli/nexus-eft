@@ -32,6 +32,7 @@ export const TRACKER_QUERY = gql`
             name
             shortName
             iconLink
+            image512pxLink
           }
         }
         ... on TaskObjectiveQuestItem {
@@ -41,6 +42,7 @@ export const TRACKER_QUERY = gql`
             name
             shortName
             iconLink
+            image512pxLink
           }
         }
       }
@@ -61,6 +63,7 @@ export const TRACKER_QUERY = gql`
             name
             shortName
             iconLink
+            image512pxLink
           }
         }
         ... on TaskObjectiveTaskStatus {
@@ -83,6 +86,7 @@ export const TRACKER_QUERY = gql`
             name
             shortName
             iconLink
+            image512pxLink
           }
           attributes {
             type

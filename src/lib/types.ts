@@ -55,6 +55,7 @@ export type ApiItem = {
   name: string;
   shortName: string | null;
   iconLink: string | null;
+  image512pxLink: string | null;
 };
 
 export type ApiTaskObjective = {

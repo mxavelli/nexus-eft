@@ -13,71 +13,68 @@ export function ItemRow({ item, scope }: Props) {
 
   return (
     <li className="flex flex-col overflow-hidden rounded-md border border-zinc-700 bg-zinc-900 shadow-sm shadow-black/40">
-      <div className="flex flex-col gap-2 px-3 py-2">
-        <button
-          type="button"
-          aria-expanded={open}
-          aria-controls={`sources-${item.rowKey}`}
-          aria-label={`${open ? "Collapse" : "Expand"} sources for ${item.displayName}`}
-          onClick={() => setOpen((v) => !v)}
-          className="flex min-w-0 items-start gap-2 rounded text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
-        >
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-controls={`sources-${item.rowKey}`}
+        aria-label={`${open ? "Collapse" : "Expand"} sources for ${item.displayName}`}
+        onClick={() => setOpen((v) => !v)}
+        className="flex flex-col text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
+      >
+        <div className="relative flex aspect-square w-full items-center justify-center overflow-hidden bg-zinc-950/60">
           <span
             aria-hidden="true"
-            className={`mt-1 shrink-0 text-zinc-500 transition-transform ${
+            className={`absolute top-1.5 left-2 z-10 rounded bg-zinc-950/70 px-1.5 py-0.5 text-xs text-zinc-300 transition-transform ${
               open ? "rotate-90" : ""
             }`}
           >
             ▸
           </span>
-
-          <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded bg-zinc-950/60">
-            {item.iconLink ? (
-              <img
-                src={item.iconLink}
-                alt=""
-                loading="lazy"
-                className="h-16 w-16 object-contain"
-              />
-            ) : (
-              <span className="text-xs text-zinc-600">—</span>
-            )}
-          </div>
-
-          <div className="min-w-0 flex-1">
-            <div
-              className="line-clamp-2 break-words text-sm text-zinc-100"
-              title={item.displayName}
-            >
-              {item.displayName}
-            </div>
-            <div className="mt-0.5 flex flex-wrap items-center gap-1.5">
-              {item.kind === "questItem" && <Badge tone="violet">Quest</Badge>}
-              {item.kind === "any-of" && <Badge tone="amber">Any of</Badge>}
-              {item.fir && item.kind !== "questItem" && (
-                <Badge tone="emerald">FIR</Badge>
-              )}
-              <span className="text-[11px] text-zinc-400">
-                {item.sources.length}{" "}
-                {item.sources.length === 1 ? "source" : "sources"}
-              </span>
-            </div>
-          </div>
-        </button>
-
-        <div className="flex justify-end">
-          <ItemCounter
-            scope={scope}
-            rowKey={item.rowKey}
-            required={item.required}
-          />
+          {item.iconLink ? (
+            <img
+              src={item.iconLink}
+              alt=""
+              loading="lazy"
+              className="h-full w-full object-contain"
+            />
+          ) : (
+            <span className="text-xs text-zinc-600">no image</span>
+          )}
         </div>
+
+        <div className="flex min-w-0 flex-col gap-1 px-3 pt-2">
+          <div
+            className="line-clamp-2 break-words text-sm text-zinc-100"
+            title={item.displayName}
+          >
+            {item.displayName}
+          </div>
+          <div className="flex flex-wrap items-center gap-1.5">
+            {item.kind === "questItem" && <Badge tone="violet">Quest</Badge>}
+            {item.kind === "any-of" && <Badge tone="amber">Any of</Badge>}
+            {item.fir && item.kind !== "questItem" && (
+              <Badge tone="emerald">FIR</Badge>
+            )}
+            <span className="text-[11px] text-zinc-400">
+              {item.sources.length}{" "}
+              {item.sources.length === 1 ? "source" : "sources"}
+            </span>
+          </div>
+        </div>
+      </button>
+
+      <div className="flex justify-end px-3 pt-2 pb-2">
+        <ItemCounter
+          scope={scope}
+          rowKey={item.rowKey}
+          required={item.required}
+        />
       </div>
 
       {open && (
         <div
           id={`sources-${item.rowKey}`}
-          className="border-t border-zinc-800 bg-zinc-950/40"
+          className="border-t border-zinc-700 bg-zinc-950/80"
         >
           <QuestSources sources={item.sources} />
         </div>

@@ -34,7 +34,7 @@ createRoot(root).render(
         persistOptions={{
           persister,
           maxAge: ONE_HOUR * 24 * 7,
-          buster: "v6",
+          buster: "v7",
         }}
       >
         <App />

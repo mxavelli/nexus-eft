@@ -7,17 +7,14 @@ export function LoadingSkeleton() {
       {Array.from({ length: 9 }).map((_, i) => (
         <li
           key={i}
-          className="flex flex-col gap-2 rounded-md border border-zinc-700 bg-zinc-900 px-3 py-2"
+          className="flex flex-col overflow-hidden rounded-md border border-zinc-700 bg-zinc-900"
         >
-          <div className="flex items-start gap-2">
-            <div className="mt-1 h-3 w-3 shrink-0 rounded-sm bg-zinc-800" />
-            <div className="h-16 w-16 shrink-0 rounded bg-zinc-800" />
-            <div className="flex min-w-0 flex-1 flex-col gap-1.5">
-              <div className="h-3 w-3/4 rounded bg-zinc-800" />
-              <div className="h-2.5 w-1/2 rounded bg-zinc-900" />
-            </div>
+          <div className="aspect-square w-full bg-zinc-800" />
+          <div className="flex flex-col gap-1.5 px-3 pt-2">
+            <div className="h-3 w-3/4 rounded bg-zinc-800" />
+            <div className="h-2.5 w-1/2 rounded bg-zinc-800/70" />
           </div>
-          <div className="flex justify-end">
+          <div className="flex justify-end px-3 pt-2 pb-2">
             <div className="h-7 w-40 rounded bg-zinc-800" />
           </div>
         </li>
