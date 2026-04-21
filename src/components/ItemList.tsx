@@ -16,7 +16,7 @@ export function ItemList({ items, scope }: Props) {
   }
 
   return (
-    <ul className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 md:grid-cols-3">
+    <ul className="grid gap-1.5 [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]">
       {items.map((item) => (
         <ItemRow key={item.rowKey} item={item} scope={scope} />
       ))}

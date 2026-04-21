@@ -92,7 +92,7 @@ export default function App() {
   }, [allRows, firOnly, includeQuestItems, allSearch]);
 
   return (
-    <main className="mx-auto flex h-full max-w-6xl flex-col gap-4 p-6 md:p-8">
+    <main className="mx-auto flex h-full w-full flex-col gap-4 p-6 md:p-8">
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Nexus EFT</h1>
@@ -126,7 +126,7 @@ export default function App() {
               No items match the current filters.
             </p>
           ) : (
-            <ul className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 md:grid-cols-3">
+            <ul className="grid gap-1.5 [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]">
               {filteredAll.map((row) => (
                 <AllItemRow key={row.groupKey} item={row} />
               ))}
