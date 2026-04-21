@@ -82,13 +82,13 @@ export function AllItemRow({ item }: Props) {
             ▸
           </span>
 
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded bg-zinc-950/60">
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded bg-zinc-950/60">
             {item.iconLink ? (
               <img
                 src={item.iconLink}
                 alt=""
                 loading="lazy"
-                className="h-12 w-12 object-contain"
+                className="h-16 w-16 object-contain"
               />
             ) : (
               <span className="text-xs text-zinc-600">—</span>
