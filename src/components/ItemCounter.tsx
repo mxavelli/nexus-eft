@@ -23,7 +23,7 @@ export function ItemCounter({ scope, rowKey, required }: Props) {
         aria-label={`Decrease count for ${rowKey}, currently ${count} of ${required}`}
         disabled={atMin}
         onClick={() => adjust(scope, rowKey, -1, required)}
-        className="flex h-7 w-7 items-center justify-center rounded border border-zinc-600 bg-zinc-800 text-zinc-200 transition-colors enabled:hover:border-zinc-400 enabled:hover:text-zinc-50 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
+        className="flex h-9 w-9 items-center justify-center rounded border border-zinc-600 bg-zinc-800 text-base text-zinc-200 transition-colors enabled:hover:border-zinc-400 enabled:hover:text-zinc-50 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
       >
         −
       </button>
@@ -42,10 +42,10 @@ export function ItemCounter({ scope, rowKey, required }: Props) {
           setCount(scope, rowKey, clamped);
         }}
         onFocus={(e) => e.target.select()}
-        className="h-7 w-11 rounded border border-zinc-600 bg-zinc-800 text-center font-mono text-xs tabular-nums text-zinc-50 focus:border-emerald-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+        className="h-9 w-14 rounded border border-zinc-600 bg-zinc-800 text-center font-mono text-sm tabular-nums text-zinc-50 focus:border-emerald-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
       />
 
-      <span className="font-mono text-xs tabular-nums text-zinc-300" aria-hidden="true">
+      <span className="font-mono text-sm tabular-nums text-zinc-300" aria-hidden="true">
         /{" "}
         <span className={complete ? "text-emerald-300" : "text-zinc-100"}>
           {required}
@@ -57,7 +57,7 @@ export function ItemCounter({ scope, rowKey, required }: Props) {
         aria-label={`Increase count for ${rowKey}, currently ${count} of ${required}`}
         disabled={atMax}
         onClick={() => adjust(scope, rowKey, 1, required)}
-        className="flex h-7 w-7 items-center justify-center rounded border border-zinc-600 bg-zinc-800 text-zinc-200 transition-colors enabled:hover:border-zinc-400 enabled:hover:text-zinc-50 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
+        className="flex h-9 w-9 items-center justify-center rounded border border-zinc-600 bg-zinc-800 text-base text-zinc-200 transition-colors enabled:hover:border-zinc-400 enabled:hover:text-zinc-50 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
       >
         +
       </button>

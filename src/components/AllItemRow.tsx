@@ -75,7 +75,7 @@ export function AllItemRow({ item }: Props) {
         <div className="relative flex aspect-square w-full items-center justify-center overflow-hidden bg-zinc-950/60">
           <span
             aria-hidden="true"
-            className={`absolute top-1.5 left-2 z-10 rounded bg-zinc-950/70 px-1.5 py-0.5 text-xs text-zinc-300 transition-transform ${
+            className={`absolute top-2 left-2 z-10 rounded bg-zinc-950/75 px-2 py-1 text-sm text-zinc-200 transition-transform ${
               open ? "rotate-90" : ""
             }`}
           >
@@ -93,14 +93,14 @@ export function AllItemRow({ item }: Props) {
           )}
         </div>
 
-        <div className="flex min-w-0 flex-col gap-1 px-3 pt-2">
+        <div className="flex min-w-0 flex-col gap-1.5 px-3 pt-3">
           <div
-            className="line-clamp-2 break-words text-sm text-zinc-100"
+            className="line-clamp-2 break-words text-base font-medium leading-snug text-zinc-50"
             title={item.displayName}
           >
             {item.displayName}
           </div>
-          <div className="flex flex-wrap items-center gap-1">
+          <div className="flex flex-wrap items-center gap-1.5">
             {item.kind === "questItem" && <Badge tone="violet">Quest</Badge>}
             {item.kind === "any-of" && <Badge tone="amber">Any of</Badge>}
             {item.hasFir && item.kind !== "questItem" && (
@@ -121,7 +121,7 @@ export function AllItemRow({ item }: Props) {
                   key={scope}
                   title={scopeLabel(scope)}
                   aria-label={scopeLabel(scope)}
-                  className={`rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide ring-1 ring-inset ${cfg.classes}`}
+                  className={`rounded px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide ring-1 ring-inset ${cfg.classes}`}
                 >
                   {cfg.short}
                 </span>
@@ -131,7 +131,7 @@ export function AllItemRow({ item }: Props) {
         </div>
       </button>
 
-      <div className="flex justify-end px-3 pt-2 pb-2">
+      <div className="flex justify-end px-3 pt-3 pb-3">
         <AllItemCounter row={item} />
       </div>
 
@@ -183,7 +183,7 @@ function Badge({
   }[tone];
   return (
     <span
-      className={`rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide ring-1 ring-inset ${classes}`}
+      className={`rounded px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide ring-1 ring-inset ${classes}`}
     >
       {children}
     </span>

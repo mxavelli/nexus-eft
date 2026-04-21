@@ -52,7 +52,7 @@ export function AllItemCounter({ row }: Props) {
         aria-expanded={open}
         aria-label={`${row.displayName}: ${totalCurrent} of ${row.totalRequired} collected. Click to open credit breakdown.`}
         className={
-          "flex items-center gap-1.5 rounded-md border px-2.5 py-1 font-mono text-xs tabular-nums transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500 " +
+          "flex h-9 items-center gap-1.5 rounded-md border px-3 font-mono text-sm tabular-nums transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500 " +
           (complete
             ? "border-emerald-500 bg-emerald-500/20 text-emerald-100 hover:bg-emerald-500/30"
             : "border-zinc-600 bg-zinc-800 text-zinc-100 hover:border-zinc-400")

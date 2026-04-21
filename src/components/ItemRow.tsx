@@ -24,7 +24,7 @@ export function ItemRow({ item, scope }: Props) {
         <div className="relative flex aspect-square w-full items-center justify-center overflow-hidden bg-zinc-950/60">
           <span
             aria-hidden="true"
-            className={`absolute top-1.5 left-2 z-10 rounded bg-zinc-950/70 px-1.5 py-0.5 text-xs text-zinc-300 transition-transform ${
+            className={`absolute top-2 left-2 z-10 rounded bg-zinc-950/75 px-2 py-1 text-sm text-zinc-200 transition-transform ${
               open ? "rotate-90" : ""
             }`}
           >
@@ -42,9 +42,9 @@ export function ItemRow({ item, scope }: Props) {
           )}
         </div>
 
-        <div className="flex min-w-0 flex-col gap-1 px-3 pt-2">
+        <div className="flex min-w-0 flex-col gap-1.5 px-3 pt-3">
           <div
-            className="line-clamp-2 break-words text-sm text-zinc-100"
+            className="line-clamp-2 break-words text-base font-medium leading-snug text-zinc-50"
             title={item.displayName}
           >
             {item.displayName}
@@ -55,7 +55,7 @@ export function ItemRow({ item, scope }: Props) {
             {item.fir && item.kind !== "questItem" && (
               <Badge tone="emerald">FIR</Badge>
             )}
-            <span className="text-[11px] text-zinc-400">
+            <span className="text-xs text-zinc-400">
               {item.sources.length}{" "}
               {item.sources.length === 1 ? "source" : "sources"}
             </span>
@@ -63,7 +63,7 @@ export function ItemRow({ item, scope }: Props) {
         </div>
       </button>
 
-      <div className="flex justify-end px-3 pt-2 pb-2">
+      <div className="flex justify-end px-3 pt-3 pb-3">
         <ItemCounter
           scope={scope}
           rowKey={item.rowKey}
@@ -97,7 +97,7 @@ function Badge({
   }[tone];
   return (
     <span
-      className={`rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide ring-1 ring-inset ${classes}`}
+      className={`rounded px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide ring-1 ring-inset ${classes}`}
     >
       {children}
     </span>
