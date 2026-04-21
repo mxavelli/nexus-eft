@@ -25,7 +25,7 @@ export function AllProgressSummary({ rows }: Props) {
 
   return (
     <div
-      className="flex items-center gap-2 text-sm"
+      className="flex items-center gap-2.5 text-lg"
       role="status"
       aria-live="polite"
       aria-label={`Progress: ${done} of ${total} items complete, ${percent} percent`}

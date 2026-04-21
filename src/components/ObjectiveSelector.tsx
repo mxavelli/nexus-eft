@@ -18,7 +18,7 @@ export function ObjectiveSelector({ value, onChange }: Props) {
     <div
       role="tablist"
       aria-label="Objective"
-      className="inline-flex flex-wrap rounded-lg border border-zinc-700 bg-zinc-900 p-1"
+      className="inline-flex flex-wrap rounded-lg border border-zinc-700 bg-zinc-900 p-1.5"
     >
       {OPTIONS.map((opt) => {
         const active = opt.value === value;
@@ -29,7 +29,7 @@ export function ObjectiveSelector({ value, onChange }: Props) {
             aria-selected={active}
             onClick={() => onChange(opt.value)}
             className={
-              "rounded-md px-3 py-1.5 text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500 " +
+              "rounded-md px-4 py-2 text-base font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500 " +
               (active
                 ? "bg-emerald-500/25 text-emerald-100"
                 : "text-zinc-300 hover:text-zinc-50")

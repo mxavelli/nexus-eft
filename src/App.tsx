@@ -95,8 +95,8 @@ export default function App() {
     <main className="mx-auto flex h-full w-full flex-col gap-4 p-6 md:p-8">
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Nexus EFT</h1>
-          <p className="text-sm text-zinc-400">Objective item tracker</p>
+          <h1 className="text-3xl font-semibold tracking-tight">Nexus EFT</h1>
+          <p className="text-base text-zinc-400">Objective item tracker</p>
         </div>
         <div className="flex flex-wrap items-center justify-end gap-3">
           <ObjectiveSelector value={objective} onChange={setObjective} />

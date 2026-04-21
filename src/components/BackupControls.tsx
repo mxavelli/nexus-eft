@@ -108,7 +108,7 @@ export function BackupControls() {
         type="button"
         onClick={handleExport}
         aria-label="Export progress backup to a JSON file"
-        className="flex h-8 items-center gap-1 rounded-md border border-zinc-600 bg-zinc-800 px-2 text-xs font-medium text-zinc-200 transition-colors hover:border-zinc-400 hover:text-zinc-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
+        className="flex h-10 items-center gap-1.5 rounded-md border border-zinc-600 bg-zinc-800 px-3.5 text-sm font-medium text-zinc-200 transition-colors hover:border-zinc-400 hover:text-zinc-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
       >
         Export
       </button>
@@ -116,7 +116,7 @@ export function BackupControls() {
         type="button"
         onClick={handleImportClick}
         aria-label="Import a Nexus EFT backup JSON"
-        className="flex h-8 items-center gap-1 rounded-md border border-zinc-600 bg-zinc-800 px-2 text-xs font-medium text-zinc-200 transition-colors hover:border-zinc-400 hover:text-zinc-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
+        className="flex h-10 items-center gap-1.5 rounded-md border border-zinc-600 bg-zinc-800 px-3.5 text-sm font-medium text-zinc-200 transition-colors hover:border-zinc-400 hover:text-zinc-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
       >
         Import
       </button>
@@ -132,7 +132,7 @@ export function BackupControls() {
           role="status"
           aria-live="polite"
           className={
-            "text-[11px] " +
+            "text-xs " +
             (status.kind === "error" ? "text-red-300" : "text-emerald-300")
           }
         >

@@ -15,7 +15,7 @@ export function FilterBar() {
   const setSearch = usePreferencesStore((s) => s.setSearch);
 
   return (
-    <div className="flex flex-wrap items-center gap-3 text-xs">
+    <div className="flex flex-wrap items-center gap-4 text-sm">
       <Toggle checked={firOnly} onChange={toggleFirOnly} label="FIR only" />
       <Toggle
         checked={includeQuestItems}
@@ -30,7 +30,7 @@ export function FilterBar() {
             value={prestigeLevel}
             onChange={(e) => setPrestigeLevel(Number(e.target.value) as PrestigeLevel)}
             aria-label="Prestige level"
-            className="rounded border border-zinc-600 bg-zinc-800 px-2 py-1 text-zinc-50 focus:border-emerald-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60"
+            className="h-9 rounded border border-zinc-600 bg-zinc-800 px-3 text-base text-zinc-50 focus:border-emerald-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60"
           >
             {PRESTIGE_LEVELS.map((lv) => (
               <option key={lv} value={lv}>
@@ -48,14 +48,14 @@ export function FilterBar() {
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search item name…"
           aria-label="Search items by name"
-          className="h-7 w-56 rounded border border-zinc-600 bg-zinc-800 px-2 pr-7 text-zinc-50 placeholder:text-zinc-400 focus:border-emerald-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60"
+          className="h-9 w-72 rounded border border-zinc-600 bg-zinc-800 px-3 pr-9 text-base text-zinc-50 placeholder:text-zinc-400 focus:border-emerald-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60"
         />
         {search && (
           <button
             type="button"
             onClick={() => setSearch("")}
             aria-label="Clear search"
-            className="absolute right-1 flex h-5 w-5 items-center justify-center rounded text-zinc-300 hover:text-zinc-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-emerald-500"
+            className="absolute right-1.5 flex h-6 w-6 items-center justify-center rounded text-base text-zinc-300 hover:text-zinc-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-emerald-500"
           >
             ×
           </button>
@@ -75,7 +75,7 @@ function Toggle({
   label: string;
 }) {
   return (
-    <label className="flex cursor-pointer items-center gap-2 text-zinc-200 hover:text-zinc-50">
+    <label className="flex cursor-pointer items-center gap-2.5 text-zinc-200 hover:text-zinc-50">
       <span
         role="switch"
         aria-checked={checked}
@@ -89,7 +89,7 @@ function Toggle({
           }
         }}
         className={
-          "relative inline-flex h-5 w-9 shrink-0 items-center rounded-full border transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500 " +
+          "relative inline-flex h-6 w-11 shrink-0 items-center rounded-full border transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500 " +
           (checked
             ? "border-emerald-500 bg-emerald-500/40"
             : "border-zinc-600 bg-zinc-800")
@@ -97,8 +97,8 @@ function Toggle({
       >
         <span
           className={
-            "inline-block h-3.5 w-3.5 transform rounded-full bg-zinc-100 transition-transform " +
-            (checked ? "translate-x-4" : "translate-x-1")
+            "inline-block h-4 w-4 transform rounded-full bg-zinc-100 transition-transform " +
+            (checked ? "translate-x-6" : "translate-x-1")
           }
         />
       </span>
