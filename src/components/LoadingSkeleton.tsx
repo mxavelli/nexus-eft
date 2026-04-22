@@ -1,7 +1,7 @@
 export function LoadingSkeleton() {
   return (
     <ul
-      className="grid animate-pulse gap-1.5 [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]"
+      className="grid animate-pulse gap-1.5 [grid-template-columns:repeat(auto-fill,minmax(160px,1fr))]"
       aria-label="Loading items"
     >
       {Array.from({ length: 9 }).map((_, i) => (

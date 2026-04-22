@@ -126,7 +126,7 @@ export default function App() {
               No items match the current filters.
             </p>
           ) : (
-            <ul className="grid gap-1.5 [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]">
+            <ul className="grid gap-1.5 [grid-template-columns:repeat(auto-fill,minmax(160px,1fr))]">
               {filteredAll.map((row) => (
                 <AllItemRow key={row.groupKey} item={row} />
               ))}
