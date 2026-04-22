@@ -25,6 +25,35 @@ function dedupItems(items: ApiItem[]): ApiItem[] {
   return out;
 }
 
+function objectiveContentKey(obj: ApiTaskObjective): string {
+  if (obj.__typename === "TaskObjectiveItem" && obj.items) {
+    const itemIds = obj.items
+      .map((i) => i.id)
+      .sort()
+      .join(",");
+    return `item::${obj.count ?? 0}::${obj.foundInRaid ?? false}::${itemIds}`;
+  }
+  if (obj.__typename === "TaskObjectiveQuestItem" && obj.questItem) {
+    return `questItem::${obj.questItem.id}::${obj.count ?? 0}`;
+  }
+  return obj.id ?? JSON.stringify(obj);
+}
+
+function dedupObjectives(
+  objectives: ApiTaskObjective[],
+): ApiTaskObjective[] {
+  const seen = new Set<string>();
+  const out: ApiTaskObjective[] = [];
+  for (const obj of objectives) {
+    const key = objectiveContentKey(obj);
+    if (!seen.has(key)) {
+      seen.add(key);
+      out.push(obj);
+    }
+  }
+  return out;
+}
+
 function sourceOfTask(task: ApiTask): ItemSource {
   return {
     kind: "task",
@@ -153,7 +182,7 @@ export function aggregateForKappa(tasks: ApiTask[]): TrackedItem[] {
   for (const task of tasks) {
     if (!task.kappaRequired) continue;
     const source = sourceOfTask(task);
-    for (const objective of task.objectives) {
+    for (const objective of dedupObjectives(task.objectives)) {
       ingestObjective(acc, objective, source);
     }
   }
@@ -165,7 +194,7 @@ export function aggregateForLightkeeper(tasks: ApiTask[]): TrackedItem[] {
   for (const task of tasks) {
     if (!task.lightkeeperRequired) continue;
     const source = sourceOfTask(task);
-    for (const objective of task.objectives) {
+    for (const objective of dedupObjectives(task.objectives)) {
       ingestObjective(acc, objective, source);
     }
   }
@@ -198,7 +227,7 @@ export function aggregateForPrestigeLevel(
       // Skip Collector (kappaRequired) — already tracked in the Kappa tab.
       if (task.kappaRequired) continue;
       const taskSource = sourceOfTask(task);
-      for (const objective of task.objectives) {
+      for (const objective of dedupObjectives(task.objectives)) {
         ingestObjective(acc, objective, taskSource);
       }
     }
@@ -253,6 +282,46 @@ function groupKeyFor(item: TrackedItem): string {
   return item.rowKey.replace(/::(fir|any)$/, "");
 }
 
+function aggregatePrestigeForAll(
+  prestige: ApiPrestige[],
+  tasks: ApiTask[],
+): Array<{ scope: ScopeKey; items: TrackedItem[] }> {
+  const seenTaskIds = new Set<string>();
+  return PRESTIGE_LEVELS.map((lv) => {
+    const acc: Accumulator = new Map();
+    const target = prestige.find((p) => p.prestigeLevel === lv);
+    if (!target) return { scope: `prestige-${lv}` as ScopeKey, items: [] };
+
+    const prestigeSource = sourceOfPrestige(target);
+    const tasksById = new Map(tasks.map((t) => [t.id, t]));
+
+    for (const condition of target.conditions) {
+      if (condition.__typename === "TaskObjectiveItem") {
+        ingestObjective(acc, condition, prestigeSource);
+        continue;
+      }
+      if (
+        condition.__typename === "TaskObjectiveTaskStatus" &&
+        condition.task?.id
+      ) {
+        const taskId = condition.task.id;
+        if (seenTaskIds.has(taskId)) continue;
+        seenTaskIds.add(taskId);
+
+        const task = tasksById.get(taskId);
+        if (!task) continue;
+        if (task.kappaRequired || task.lightkeeperRequired) continue;
+        const taskSource = sourceOfTask(task);
+        for (const objective of dedupObjectives(task.objectives)) {
+          ingestObjective(acc, objective, taskSource);
+        }
+      }
+    }
+
+    return { scope: `prestige-${lv}` as ScopeKey, items: finalize(acc) };
+  });
+}
+
 export function aggregateForAll(
   tasks: ApiTask[],
   hideout: ApiHideoutStation[] | undefined,
@@ -262,10 +331,7 @@ export function aggregateForAll(
     { scope: "kappa", items: aggregateForKappa(tasks) },
     { scope: "hideout", items: aggregateForHideout(hideout) },
     { scope: "lightkeeper", items: aggregateForLightkeeper(tasks) },
-    ...PRESTIGE_LEVELS.map((lv) => ({
-      scope: `prestige-${lv}` as ScopeKey,
-      items: aggregateForPrestigeLevel(prestige, lv, tasks),
-    })),
+    ...aggregatePrestigeForAll(prestige, tasks),
   ];
 
   const byGroup = new Map<string, AllRow>();
